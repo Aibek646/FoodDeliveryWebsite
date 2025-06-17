@@ -32,29 +32,7 @@ const ExploreMenu = ({ category, setCategory }) => {
         mission is to satisfy your cravings and elevate your dining experience,
         one deliocios meal at a time{" "}
       </p>
-      <div className="explore-menu-list">
-        {/* {menu_list.map((item, index) => {
-          return (
-            <div
-              onClick={() =>
-                setCategory((prev) =>
-                  prev === item.menu_name ? "All" : item.menu_name
-                )
-              }
-              key={index}
-              className="explore-menu-list-item"
-            >
-              <img
-                className={category === item.menu_image.name ? "active" : ""}
-                src={item.menu_image}
-                alt=""
-              />
-              <p>{item.menu_name}</p>
-            </div>
-          );
-        })} */}
-        {menu_list.map(getListMenu)}
-      </div>
+      <div className="explore-menu-list">{menu_list.map(getListMenu)}</div>
       <hr />
     </div>
   );
