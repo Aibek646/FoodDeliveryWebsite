@@ -1,3 +1,4 @@
+import { log } from "console";
 import userModel from "../models/userModel.js";
 
 // add to Cart
@@ -23,7 +24,7 @@ const addToCart = async (req, res) => {
 const removeFromCart = async (req, res) => {
   try {
     let userData = await userModel.findById(req.body.userId);
-    let cartData = await userData.cartData;
+    let cartData = userData.cartData;
     if (cartData[req.body.itemId] > 0) {
       cartData[req.body.itemId] -= 1;
     }
@@ -39,8 +40,14 @@ const removeFromCart = async (req, res) => {
 const getCart = async (req, res) => {
   try {
     let userData = await userModel.findById(req.body.userId);
-    let cartData = await userData.cartData;
-    res.json({ success: true, cartData: cartData });
+    if (!userData) {
+      res.json({
+        success: "false",
+        message: "user not exist",
+      });
+    }
+    let cartData = userData.cartData;
+    res.json({ success: true, cartData });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: "Error" });
